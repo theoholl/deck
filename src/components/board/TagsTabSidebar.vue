@@ -33,8 +33,8 @@
 					</p>
 				</template>
 				<template v-else>
-					<div v-if="canManage && !isArchived" class="label-title" @click="clickEdit(label)">
-						<span :style="{ backgroundColor: `#${label.color}`, color: textColor(label.color) }">{{ label.title }}</span>
+					<div v-if="canManage && !isArchived" class="label-title">
+						<span :style="{ backgroundColor: `#${label.color}`, color: textColor(label.color) }" @click="clickEdit(label)">{{ label.title }}</span>
 					</div>
 					<div v-else class="label-title">
 						<span :style="{ backgroundColor: `#${label.color}`, color: textColor(label.color) }">{{ label.title }}</span>
@@ -106,7 +106,7 @@ export default {
 			addLabelObj: null,
 			addLabel: false,
 			addLabelColor: null,
-			missingDataLabel: t('deck', 'title and color value must be provided'),
+			missingDataLabel: t('deck', 'Title and color are required'),
 			defaultColors: ['31CC7C', '17CCC', 'FF7A66', 'F1DB50', '7C31CC', 'CC317C', '3A3B3D', 'CACBCD'],
 		}
 	},
@@ -183,8 +183,7 @@ export default {
 	.labels li {
 		display: flex;
 		margin-bottom: 3px;
-		align-items: stretch;
-		height: $clickable-area;
+		padding: 3px 0;
 
 		&:hover {
 			background-color: var(--color-background-hover);
@@ -193,16 +192,16 @@ export default {
 
 		.label-title {
 			flex-grow: 1;
-			padding: 10px;
+			padding: 0 10px;
 
 			&:hover, span:hover {
 				cursor: pointer;
 			}
 
 			span {
-				vertical-align: middle;
+				display: inline-block;
 				border-radius: 15px;
-				padding: 7px 12px;
+				padding: 5px 12px;
 			}
 		}
 		&:not(.editing) button {
@@ -217,6 +216,7 @@ export default {
 				display: flex;
 				align-items: stretch;
 				position: relative;
+				height: 36px;
 			}
 
 			.color0 {
@@ -233,13 +233,15 @@ export default {
 		}
 		form {
 			display: flex;
+			align-items: center;
 			input[type=text] {
 				flex-grow: 1;
-				margin: 5px;
-			}
-			input[type=submit] {
-				margin-top: 5px;
+				margin: 0 5px;
 			}
 		}
-	}
+
+		p {
+			padding: 0 5px;
+		}
+	}	
 </style>
